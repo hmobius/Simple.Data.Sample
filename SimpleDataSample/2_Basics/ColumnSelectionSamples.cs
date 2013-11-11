@@ -4,6 +4,12 @@
     {
         internal void RunAll()
         {
+            // No arguments sent to select, Simple.Data ignores select function, returns all columns.
+            ExampleRunner.RunQuery(
+                "No arguments to Select.",
+                db => db.Albums.All()
+                        .Select());
+
             // select count(*) from OrderDetails using .Star().Count()
             ExampleRunner.RunQuery(
                 "select * from Albums using db.Albums.Star()",
@@ -60,6 +66,13 @@
                 );
 
             ExampleRunner.RunQuery(
+                "Use Select cumulatively to Get all AlbumIds and Titles. Throws InvalidOperationException",
+                db => db.Albums.FindAll(db.Albums.GenreId == 1)
+                        .Select(db.dbo.Albums.AlbumId)
+                        .Select(db.dbo.Albums.Title)
+                );
+
+            ExampleRunner.RunQuery(
                 "Run Select by itself without a command to qualify",
                 db => db.Albums.Select(
                     db.Albums.AlbumId,
@@ -73,7 +86,7 @@
                 );
 
             ExampleRunner.RunQuery(
-                "Try to select a column that doesn't exist in the table",
+                "Try to select a column that doesn't exist in the table. Throws UnresolvableObjectException",
                 db => db.Albums.All()
                         .Select(
                             db.Albums.OrderId)
