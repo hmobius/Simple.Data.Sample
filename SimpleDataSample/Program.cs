@@ -42,6 +42,8 @@ namespace SimpleDataSample
                     case "8":
                         var columnSelectionDemo = new ColumnSelectionSamples();
                         columnSelectionDemo.RunAll();
+                        var columnAliasingDemo = new ColumnAliasingSamples();
+                        columnAliasingDemo.RunAll();
                         break;
                     case "9":
                         var basicWhereDemo = new WhereMethodSamples();

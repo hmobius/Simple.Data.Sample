@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="2_Basics\AllMethodSamples.cs" />
+    <Compile Include="2_Basics\ColumnAliasingSamples.cs" />
     <Compile Include="2_Basics\ColumnSelectionSamples.cs" />
     <Compile Include="2_Basics\SingleOrDefaultMethodSamples.cs" />
     <Compile Include="2_Basics\FirstOrDefaultMethodSamples.cs" />
