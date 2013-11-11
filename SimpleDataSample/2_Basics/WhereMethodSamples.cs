@@ -6,18 +6,25 @@ namespace SimpleDataSample
     {
         internal void RunAll()
         {
+            // To Flag - Issue 321
+            // Throws BadExpressionException - Should throw InvalidOperationException
             ExampleRunner.RunQuery(
                 "Where() called without query command. db.Albums.Where(db.Albums.GenreId == 1)",
                 db => db.Albums.Where(db.Albums.GenreId == 1));
 
+            // To Flag - Issue 322
+            // Throws BadExpressionException - Should throw ArgumentException
             ExampleRunner.RunQuery(
-                "Where called without no parameters. db.Albums.All().Where()",
+                "Where called with no parameters. db.Albums.All().Where()",
                 db => db.Albums.All().Where());
 
+            // Throws UnresolvableObjectException
             ExampleRunner.RunQuery(
-                "Where called with invalid SimpleExpression as parameter. FIeld name wrong",
+                "Where called with invalid SimpleExpression as parameter. Field name wrong",
                 db => db.Albums.All().Where(db.Albums.NonExistentColumn == 1));
 
+            // To Flag - Issue 322
+            // Throws BadExpressionException - Should throw ArgumentException
             ExampleRunner.RunQuery(
                 "Where called with two valid SimpleExpressions as parameters.",
                 db => db.Albums.All().Where(db.Albums.GenreId == 1, db.Albums.ArtistId == 120));
